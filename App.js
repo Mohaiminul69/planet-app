@@ -5,9 +5,10 @@ import { spacing } from "./src/theme/spacing";
 import { useFonts } from "expo-font";
 import { typography } from "./src/theme/typography";
 import Text from "./src/components/Text/Text";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
+import { Fragment } from "react";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,19 +24,20 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Fragment>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <StatusBar style="light" />
+    </Fragment>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: colors.black,
   },
 });
