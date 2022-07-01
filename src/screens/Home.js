@@ -1,4 +1,10 @@
-import { View, FlatList, StyleSheet, SafeAreaView } from "react-native";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import React from "react";
 import Text from "../components/Text/Text";
 import PlanetHeader from "../components/PlanetHeader";
@@ -7,7 +13,7 @@ import { PLANET_LIST } from "../data/PlanetList";
 import { spacing } from "../theme/spacing";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader />
@@ -17,7 +23,12 @@ export default function Home() {
         data={PLANET_LIST}
         renderItem={({ item, index }) => {
           return (
-            <View style={styles.item}>
+            <Pressable
+              onPress={() => {
+                navigation.navigate("Details", { planet: item });
+              }}
+              style={styles.item}
+            >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View
                   style={[styles.circle, { backgroundColor: item.color }]}
@@ -27,7 +38,7 @@ export default function Home() {
                 </Text>
               </View>
               <AntDesign name="right" size={18} color="white" />
-            </View>
+            </Pressable>
           );
         }}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
