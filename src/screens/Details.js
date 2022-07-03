@@ -29,7 +29,7 @@ export default function Details({ route }) {
         return <JupiterSvg />;
       case "mars":
         return <MarsSvg />;
-      case "nepute":
+      case "neptune":
         return <NeptuneSvg />;
       case "saturn":
         return <SaturnSvg />;
