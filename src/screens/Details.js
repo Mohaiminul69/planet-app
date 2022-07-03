@@ -4,11 +4,12 @@ import Text from "../components/Text/Text";
 import PlanetHeader from "../components/PlanetHeader";
 import { colors } from "../theme/colors";
 
-export default function Details() {
+export default function Details({ route }) {
+  const planet = route.params.planet;
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader backBtn={true} />
-      <Text>Details</Text>
+      <Text>{planet.name}</Text>
     </SafeAreaView>
   );
 }

@@ -12,8 +12,33 @@ import { colors } from "../theme/colors";
 import { PLANET_LIST } from "../data/PlanetList";
 import { spacing } from "../theme/spacing";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
+const PlanetItem = ({ item }) => {
+  const navigation = useNavigation();
+  return (
+    <Pressable
+      onPress={() => {
+        navigation.navigate("Details", { planet: item });
+      }}
+      style={styles.item}
+    >
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View style={[styles.circle, { backgroundColor: item.color }]} />
+        <Text preset="h4" style={styles.itemName}>
+          {item.name}
+        </Text>
+      </View>
+      <AntDesign name="right" size={18} color="white" />
+    </Pressable>
+  );
+};
 
 export default function Home({ navigation }) {
+  const renderItem = ({ item }) => {
+    return <PlanetItem item={item} />;
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader />
@@ -21,26 +46,7 @@ export default function Home({ navigation }) {
         contentContainerStyle={styles.list}
         keyExtractor={(item) => item.name}
         data={PLANET_LIST}
-        renderItem={({ item, index }) => {
-          return (
-            <Pressable
-              onPress={() => {
-                navigation.navigate("Details", { planet: item });
-              }}
-              style={styles.item}
-            >
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View
-                  style={[styles.circle, { backgroundColor: item.color }]}
-                />
-                <Text preset="h4" style={styles.itemName}>
-                  {item.name}
-                </Text>
-              </View>
-              <AntDesign name="right" size={18} color="white" />
-            </Pressable>
-          );
-        }}
+        renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </SafeAreaView>
