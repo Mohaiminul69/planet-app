@@ -6,7 +6,7 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Text from "../components/Text/Text";
 import PlanetHeader from "../components/PlanetHeader";
 import { colors } from "../theme/colors";
@@ -37,8 +37,18 @@ const PlanetItem = ({ item, index }) => {
 };
 
 export default function Home() {
+  const [list, setList] = useState(PLANET_LIST);
   const renderItem = ({ item, index }) => {
     return <PlanetItem item={item} index={index} />;
+  };
+
+  const searchFilter = (text) => {
+    const filteredList = PLANET_LIST.filter((planet) => {
+      const planetName = planet.name.toLowerCase();
+      const userTypedText = text.toLowerCase();
+      return planetName.includes(userTypedText);
+    });
+    setList(filteredList);
   };
 
   return (
@@ -49,11 +59,12 @@ export default function Home() {
         placeholderTextColor={colors.white}
         autoCorrect={false}
         style={styles.searchInput}
+        onChangeText={(text) => searchFilter(text)}
       />
       <FlatList
         contentContainerStyle={styles.list}
         keyExtractor={(item) => item.name}
-        data={PLANET_LIST}
+        data={list}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
