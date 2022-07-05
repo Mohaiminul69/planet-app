@@ -4,6 +4,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Pressable,
+  TextInput,
 } from "react-native";
 import React from "react";
 import Text from "../components/Text/Text";
@@ -43,6 +44,12 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <PlanetHeader />
+      <TextInput
+        placeholder="Type the planet name..."
+        placeholderTextColor={colors.white}
+        autoCorrect={false}
+        style={styles.searchInput}
+      />
       <FlatList
         contentContainerStyle={styles.list}
         keyExtractor={(item) => item.name}
@@ -78,5 +85,12 @@ const styles = StyleSheet.create({
   separator: {
     borderWidth: 0.5,
     borderBottomColor: colors.white,
+  },
+  searchInput: {
+    padding: spacing[4],
+    color: colors.white,
+    borderBottomColor: colors.white,
+    borderBottomWidth: 1,
+    margin: spacing[5],
   },
 });

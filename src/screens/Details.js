@@ -34,7 +34,7 @@ const PlanetSection = ({ title, value }) => {
 };
 
 export default function Details({ route }) {
-  const planet = route.params.planet;
+  const { planet } = route.params;
   const {
     name,
     description,
