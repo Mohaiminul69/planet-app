@@ -21,7 +21,7 @@ export default function App() {
   });
 
   if (!loaded) {
-    return <Text>Font is Loadking...</Text>;
+    return <Text>Font is Loading...</Text>;
   }
 
   return (
